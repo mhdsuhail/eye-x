@@ -1,5 +1,6 @@
 from imutils import face_utils
 from allFunctions import *
+from keyboard import *
 import numpy as np
 import pyautogui as pag
 import imutils
@@ -16,6 +17,7 @@ WINK_AR_CLOSE_THRESH = 0.19
 MOUTH_AR_CONSECUTIVE_FRAMES = 15
 EYE_AR_CONSECUTIVE_FRAMES = 15
 WINK_CONSECUTIVE_FRAMES = 10
+KEY_CONSECTIVE_FRAMES = 10
 
 # all counters are initialised
 input_run = 0
@@ -23,9 +25,13 @@ scroll_run = 0
 mouth_counter = 0
 eye_counter = 0
 wink_counter = 0
+key_counter = 0
+keyboard_run = 0
+curser_pos = (0,0)
 
 # initially all mode's are deactivated
 INPUT_MODE = False
+TYPING_MODE = False
 EYE_CLICK = False
 LEFT_WINK = False
 RIGHT_WINK = False
@@ -161,9 +167,46 @@ while True:
 
             mouth_counter = 0
 
-
     else:
         mouth_counter = 0
+
+    #code for virtual keyboard
+    if mar> MOUTH_AR_THRESH:
+        if ear <= EYE_AR_THRESH:
+            eye_counter += 1
+            if eye_counter > EYE_AR_CONSECUTIVE_FRAMES:
+                # activate and deactivate keyboard mode
+                TYPING_MODE = not TYPING_MODE
+
+                if TYPING_MODE:
+                    keyboard()
+    #for clicking over keyboard mode
+    if key_counter == 0:
+        curser_pos = pag.position()
+    if TYPING_MODE:
+        key_counter += 1
+
+        if key_counter > KEY_CONSECTIVE_FRAMES:
+            if pag.position() == curser_pos:
+                pag.click(pag.position())
+
+            key_counter = 0
+    else:
+        key_counter = 0
+    #notification over typing activation
+    if TYPING_MODE:
+        # to always run typing mode itself smoothly without mode change
+        SCROLL_MODE = False
+        INPUT_MODE = True
+        if keyboard_run == 0:
+            notify("TYPING MODE ON","type by placing cursor on key for 10 seconds")
+            keyboard_run = 1
+    #notification over typing mode deactivation
+    if not TYPING_MODE:
+        if keyboard_run == 1:
+            notify("TYPING MODE OF","the typing was turned of")
+            keyboard_run = 0
+
     # notification over input mode activation
     if INPUT_MODE:
         if input_run == 0:
