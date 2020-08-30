@@ -9,15 +9,16 @@ Three main modules are here.
 3- Keyboard Module :keyboard controll code are bundled here
 
 TECHNOLOGIES USED:
-1 - Open cv
-2 - Dlib
-3 - Pyautogui
-4 - Numpy
+1 - Open cv , 
+2 - Dlib , 
+3 - Pyautogui , 
+4 - Numpy ,
 
 
 REFERENCES:
-Eye blink detection using opencv
-pyimage search
+Eye blink detection using opencv, 
+Python mega course - Ardit sulce,
+pyimage search - Adrian, 
 Mouse cursor control hands free - acl21 
 
 I am pretty happy to thank everyone, who made resorces for all of my references, specially to the abow mentionend references, also stackoverflow for the usual support. 
