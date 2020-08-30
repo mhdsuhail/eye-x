@@ -1,7 +1,7 @@
 # eye-x
 code are suitable for OS X - this code is for osX with implemented notification system and keyboard controll according to mac os.
 
-This is a webcam enabled system for controlling the COMPUTER INTERFACE via the facial movements, developed in python 3.7,
+This is a webcam enabled system for controlling the COMPUTER INTERFACE via the facial movements, also for keyboard controll and typing mechanisms along with enabled notifications for each mode,(Typing mode, Input mode, Keyboard mode) developed in python 3.7,
 Three main modules are here.
 
 1- Main Module : Code which controll the main layer overview
